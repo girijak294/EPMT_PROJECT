@@ -11,20 +11,22 @@ public class SortUsingComparator {
 		al.add(1);
 		al.add(10);
 		al.add(8);
+		al.add(9);
 
-		Collections.sort(al, (al1, al2) -> {
+		Collections.sort(al,(al1, al2) -> {
 
 			if (al1 > al2) {
 
-				return -1;
-			} else if (al1 < al2) {
 				return 1;
+			} else if (al1 < al2) {
+				return -1;
 
 			} else
 				return 0;
 
 		});
-		System.out.println(al);
+		  
+		System.out.println(al.get(al.size()-2));
 
 	}
 

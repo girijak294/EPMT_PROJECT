@@ -14,7 +14,8 @@ public class ListSortUsingName {
 		l.add(new SortEmployeeEx("qwewr"));
 		l.add(new SortEmployeeEx("thtth"));
 		
-		Collections.sort(l, (name1, name2) -> name1.getName().compareTo(name2.getName()));
+		//Collections.sort(l, (name1, name2) -> name1.getName().compareTo(name2.getName()));
+		l.sort((name1, name2) -> name1.getName().compareTo(name2.getName()));
 		
 		for(SortEmployeeEx k: l) {
 		System.out.println(k.getName());}
