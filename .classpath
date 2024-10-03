@@ -9,6 +9,7 @@
 	<classpathentry kind="src" path="collections"/>
 	<classpathentry kind="src" path="OOPS"/>
 	<classpathentry kind="src" path="java8"/>
-	<classpathentry excluding="src/|collections/|OOPS/|java8/" kind="src" path=""/>
+	<classpathentry excluding="src/|collections/|OOPS/|java8/|design patterns/|design patterns/" kind="src" path=""/>
+	<classpathentry kind="src" path="design patterns"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
