@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -5,38 +6,83 @@ import java.util.stream.Collectors;
 
 public class FunctionInterfaceDemo {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        // List of products
-        List<FunctionInterfaceProduct> products = Arrays.asList(
-                new FunctionInterfaceProduct("Laptop", 1200, "electronics", "A"),
-                new FunctionInterfaceProduct("Phone", 900, "electronics", "B"),
-                new FunctionInterfaceProduct("Table", 150, "furniture", "A"),
-                new FunctionInterfaceProduct("Headphones", 80, "electronics", "B"),
-                new FunctionInterfaceProduct("Book", 30, "stationary", "C")
-        );
+		// List of products
 
-        // 1. Function to calculate the total cost of all products
-        Function<List<FunctionInterfaceProduct>, Double> totalCost = productList -> 
-                productList.stream().mapToDouble(p -> p.price).sum();
-        System.out.println("Total cost of all products: " + totalCost.apply(products));
+		List<FunctionInterfaceProduct> al = new ArrayList<>();
+		al.add(new FunctionInterfaceProduct("Laptop", 1200, "electronics", "A"));
+		al.add(new FunctionInterfaceProduct("Phone", 1500, "electronics", "B"));
+		al.add(new FunctionInterfaceProduct("Table", 150, "furniture", "A"));
+		al.add(new FunctionInterfaceProduct("Headphones", 80, "electronics", "B"));
+		al.add(new FunctionInterfaceProduct("Book", 30, "stationary", "C"));
 
-        // 2. Function to calculate the cost of products whose price is > 1000
-        Function<List<FunctionInterfaceProduct>, Double> costOfExpensiveProducts = productList -> 
-                productList.stream().filter(p -> p.price > 1000).mapToDouble(p -> p.price).sum();
-        System.out.println("Cost of products with price > 1000: " + costOfExpensiveProducts.apply(products));
+		Function<List<FunctionInterfaceProduct>, Double> f = pricelist -> {
+			double cost = 0;
+			for (FunctionInterfaceProduct product : pricelist) {
+				cost = cost + product.getPrice();
+			}
+			return cost;
+		};
+		System.out.println("total cost of products is : " + f.apply(al));
 
-        // 3. Function to calculate the cost of all electronic products
-        Function<List<FunctionInterfaceProduct>, Double> costOfElectronicProducts = productList -> 
-                productList.stream().filter(p -> "electronics".equalsIgnoreCase(p.category))
-                          .mapToDouble(p -> p.price).sum();
-        System.out.println("Cost of all electronic products: " + costOfElectronicProducts.apply(products));
+		Function<List<FunctionInterfaceProduct>, Double> f1 = pricelist -> {
 
-        // 4. Function to get all products whose price is > 1000 and belongs to electronics category
-        Function<List<FunctionInterfaceProduct>, List<FunctionInterfaceProduct>> expensiveElectronics = productList -> 
-                productList.stream()
-                           .filter(p -> p.price > 1000 && "electronics".equalsIgnoreCase(p.category))
-                           .collect(Collectors.toList());
-        System.out.println("Products with price > 1000 and in electronics category: " + expensiveElectronics.apply(products));
-    }
+			double cost = 0;
+			for (FunctionInterfaceProduct product : pricelist) {
+				if (product.getPrice() > 1000) {
+					cost += product.getPrice();
+
+				}
+			}
+			return cost;
+
+		};
+		System.out.println("cost of all products greater than 1000 is : " + f1.apply(al));
+
+		Function<List<FunctionInterfaceProduct>, Double> f2 = pricelist -> {
+			double cost = 0;
+			for (FunctionInterfaceProduct product : pricelist) {
+
+				if (product.getCategory().equalsIgnoreCase("electronics")) {
+					cost = cost + product.getPrice();
+				}
+			}
+
+			return cost;
+		};
+
+		System.out.println("cost of all products with electronics category : " + f2.apply(al));
+
+		// Write a function to get all the products whose price is > 1000/
+
+		Function<List<FunctionInterfaceProduct>, List<FunctionInterfaceProduct>> f3 = productList -> {
+			List<FunctionInterfaceProduct> newl = new ArrayList<>();
+			for (FunctionInterfaceProduct p : productList) {
+
+				if (p.getPrice() > 1000) {
+
+					newl.add(p);
+				}
+			}
+			return newl;
+		};
+
+		// Function to get all products belongs to electronic category
+
+		Function<List<FunctionInterfaceProduct>, List<FunctionInterfaceProduct>> f4 = productList -> {
+			List<FunctionInterfaceProduct> newl = new ArrayList<>();
+			for (FunctionInterfaceProduct p : productList) {
+
+				if (p.getCategory().equalsIgnoreCase("Electronics")) {
+
+					newl.add(p);
+				}
+			}
+			return newl;
+		};
+
+		System.out.println("all products with price greater than 1000  with category electronics is : " + f3.andThen(f4).apply(al));
+
+	}
 }

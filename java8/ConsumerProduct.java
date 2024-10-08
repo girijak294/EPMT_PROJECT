@@ -1,16 +1,18 @@
 
-public class FunctionInterfaceProduct {
-    String name;
-    double price;
-    String category;
-    String grade;
+public class ConsumerProduct {
 
-    public FunctionInterfaceProduct(String name, double price, String category, String grade) {
-        this.name = name;
-        this.price = price;
-        this.category = category;
-        this.grade = grade;
-    }
+	
+	 private String name;
+	 private double price;
+	 private String category;
+	 private String grade;
+	 
+	 public ConsumerProduct(String name, double price, String category, String grade) {
+		 this.name=name;
+		 this.price = price;
+		 this.category = category;
+		 this.grade = grade;
+	 }
 
 	public String getName() {
 		return name;
@@ -43,7 +45,7 @@ public class FunctionInterfaceProduct {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	
+	 
 	@Override
     public String toString() {
         return "Product{" +
@@ -54,4 +56,3 @@ public class FunctionInterfaceProduct {
                 '}';
     }
 }
-
